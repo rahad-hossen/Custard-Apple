@@ -33,7 +33,7 @@ public class InsertData extends AppCompatActivity {
     private Handler handler = new Handler();
     private Runnable runnable;
     private TimeProvider timeProvider = new SystemTimeProvider();
-
+    DatabaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public class InsertData extends AppCompatActivity {
         btnInsert = findViewById(R.id.btn_insert);
         tv_display_code = findViewById(R.id.tv_display_code);
         timeINsecend = findViewById(R.id.timeINsecend);
-
+        dbHelper = new DatabaseHelper(this);
 
 
 
@@ -80,7 +80,7 @@ public class InsertData extends AppCompatActivity {
         btnInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                insertDataToDatabase();
+                saveDataLocally();
             }
         });
 
@@ -101,6 +101,30 @@ public class InsertData extends AppCompatActivity {
 //            return "Error";
 //        }
 //    }
+
+    private void saveDataLocally() {
+        String username = etUsername.getText().toString().trim();
+        String password = etPassword.getText().toString().trim();
+        String secretKey = etSecretKey.getText().toString().trim();
+
+        if (username.isEmpty() || password.isEmpty() || secretKey.isEmpty()) {
+            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // ডাটাবেজে সেভ করা শুরু
+        boolean isInserted = dbHelper.insertData(username, password, secretKey);
+
+        if (isInserted) {
+            int totalData = dbHelper.getTotalCount();
+            String message = "Data Saved! Total entries: " + totalData + " PIS";
+            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+            etUsername.setText("");
+            etSecretKey.setText("");
+        } else {
+            Toast.makeText(this, "Insert failed ❌", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     private void startOTPCycle() {
         String secret = etSecretKey.getText().toString().trim();
@@ -153,24 +177,27 @@ public class InsertData extends AppCompatActivity {
         }
     }
 
-    private void insertDataToDatabase() {
-        String username = etUsername.getText().toString().trim();
-        String password = etPassword.getText().toString().trim();
-        String secretKey = etSecretKey.getText().toString().trim();
+//    private void insertDataToDatabase() {
+//        String username = etUsername.getText().toString().trim();
+//        String password = etPassword.getText().toString().trim();
+//        String secretKey = etSecretKey.getText().toString().trim();
+//
+//        // ইনপুট ভ্যালিডেশন
+//        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password) || TextUtils.isEmpty(secretKey)) {
+//            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+//
+//        // এখানে আপনার ডেটাবেস (Firebase/SQLite) ইনসার্ট লজিক লিখবেন
+//        String successMessage = "ডেটা সেভ হয়েছে: " + username;
+//        Toast.makeText(this, successMessage, Toast.LENGTH_LONG).show();
+//
+//
+//    }
 
-        // ইনপুট ভ্যালিডেশন
-        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password) || TextUtils.isEmpty(secretKey)) {
-            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
-            return;
-        }
 
-        // এখানে আপনার ডেটাবেস (Firebase/SQLite) ইনসার্ট লজিক লিখবেন
-        String successMessage = "ডেটা সেভ হয়েছে: " + username;
-        Toast.makeText(this, successMessage, Toast.LENGTH_LONG).show();
 
-        // ইনপুট ফিল্ড খালি করে দেওয়া
-        etUsername.setText("");
-        etPassword.setText("");
-        etSecretKey.setText("");
-    }
+
+
+
 }

@@ -17,7 +17,8 @@ public class HomeScreen extends AppCompatActivity {
 
 
     MaterialCardView card_add_data;
-    TextView usernameDisplay;
+    TextView usernameDisplay,tv_balance;
+    DatabaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,8 @@ public class HomeScreen extends AppCompatActivity {
 
         card_add_data = findViewById(R.id.card_add_data);
         usernameDisplay = findViewById(R.id.usernameDisplay);
+        tv_balance = findViewById(R.id.tv_balance);
+        dbHelper = new DatabaseHelper(this);
 
         card_add_data.setOnClickListener(v -> {
             startActivity(new Intent(HomeScreen.this, InsertData.class));
@@ -41,9 +44,23 @@ public class HomeScreen extends AppCompatActivity {
             finishAffinity();
         }
 
-
-
-
+        updateDashboard();
 
     }
+
+
+    private void updateDashboard() {
+        // ডাটাবেজ থেকে মোট সংখ্যা নিয়ে আসা
+        int total = dbHelper.getTotalCount();
+
+        // টেক্সট ভিউতে সেট করা
+        tv_balance.setText(total + " PIS");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateDashboard();
+    }
+
 }
