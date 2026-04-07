@@ -40,7 +40,7 @@ import java.io.OutputStream;
 public class HomeScreen extends AppCompatActivity {
 
 
-    MaterialCardView card_add_data, card_download;
+    MaterialCardView card_add_data, card_download, Reset_dataBtn;
     TextView usernameDisplay,tv_balance;
     DatabaseHelper dbHelper;
 
@@ -54,6 +54,8 @@ public class HomeScreen extends AppCompatActivity {
         usernameDisplay = findViewById(R.id.usernameDisplay);
         tv_balance = findViewById(R.id.tv_balance);
         card_download = findViewById(R.id.card_download);
+        Reset_dataBtn = findViewById(R.id.Reset_dataBtn);
+
         dbHelper = new DatabaseHelper(this);
 
         card_add_data.setOnClickListener(v -> {
@@ -68,6 +70,9 @@ public class HomeScreen extends AppCompatActivity {
 
         });
 
+        Reset_dataBtn.setOnClickListener(v -> {
+            showResetConfirmationDialog();
+        });
 
         PrefaranceManager manager = new PrefaranceManager(HomeScreen.this);
         String username = manager.getUsername();
@@ -84,6 +89,27 @@ public class HomeScreen extends AppCompatActivity {
 
 
 
+
+    private void showResetConfirmationDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Warning")
+                .setMessage("Are you sure you want to delete all data?")
+                .setIcon(android.R.drawable.ic_dialog_alert) // একটি ওয়ার্নিং আইকন
+                .setPositiveButton("Yes", (dialog, which) -> {
+                    // ডাটাবেজ থেকে সব মুছে ফেলা
+                    dbHelper.deleteAllData();
+
+                    // হোম স্ক্রিনের সংখ্যা আপডেট করা (আগের দেওয়া updateDashboard মেথডটি)
+                    updateDashboard();
+
+                    Toast.makeText(this, "All data are deleted 🗑️", Toast.LENGTH_LONG).show();
+                })
+                .setNegativeButton("No", (dialog, which) -> {
+                    // কিছুই হবে না, শুধু ডায়ালগ বন্ধ হবে
+                    dialog.dismiss();
+                })
+                .show();
+    }
 
     private void showFileNameDialog() {
         // ১. একটি এডিট টেক্সট তৈরি করা যেখানে ইউজার নাম লিখবে

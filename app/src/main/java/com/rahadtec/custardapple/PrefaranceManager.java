@@ -1,7 +1,11 @@
 package com.rahadtec.custardapple;
 
+import static com.rahadtec.custardapple.DatabaseHelper.TABLE_NAME;
+
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
+
 
 public class PrefaranceManager {
 
@@ -38,4 +42,6 @@ public class PrefaranceManager {
         editor.clear();
         editor.apply();
     }
+
+
 }
