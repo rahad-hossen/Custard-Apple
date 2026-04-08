@@ -24,15 +24,37 @@
             android:src="@drawable/custard_apple_fresh"
             />
 
-        <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Add New Data"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:textColor="#228B22"
-        android:layout_marginBottom="30dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="horizontal"
+            android:layout_marginBottom="30dp"
+            >
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/back_icon"
+                android:contentDescription="Back"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_gravity="center"
+                android:layout_marginRight="15dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Add New Data"
+                android:textColor="#228B22"
+                android:textSize="22sp"
+
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -145,6 +167,7 @@
             android:textColor="#FFFFFF"
             app:backgroundTint="#A8E6CF"
             app:cornerRadius="12dp"
+            android:layout_marginBottom="200dp"
             android:elevation="6dp" />
 
     </LinearLayout>
