@@ -194,9 +194,18 @@
                     android:textStyle="bold" />
             </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
-
-
         </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Devloped by Rahad"
+            android:gravity="center"
+            android:layout_marginTop="30dp"
+            android:textStyle="bold"
+            android:textColor="#555555"
+            android:textSize="12sp"
+            />
 
     </LinearLayout>
 </ScrollView>

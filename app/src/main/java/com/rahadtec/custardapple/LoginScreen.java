@@ -5,6 +5,7 @@ import static android.view.View.VISIBLE;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -61,8 +62,15 @@ public class LoginScreen extends AppCompatActivity {
             String password = passwordInput.getText().toString().trim();
             pro_bar.setVisibility(VISIBLE);
 
+            String androidId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
+
             if(!Username.isEmpty() && !password.isEmpty()){
-                CheckUserAvaiable(Username,password);
+                if (!androidId.isEmpty() && androidId != null){
+                    CheckUserAvaiable(Username,password, androidId);
+                }else {
+                    Toast.makeText(this, "Sorry, Don't found Device Id", Toast.LENGTH_SHORT).show();
+                }
+
             } else {
                 pro_bar.setVisibility(GONE);
                 Toast.makeText(this, "Please enter Username & password", Toast.LENGTH_SHORT).show();
@@ -70,7 +78,12 @@ public class LoginScreen extends AppCompatActivity {
         });
     }
 
-    public void CheckUserAvaiable(String username, String password){
+
+
+
+
+
+    public void CheckUserAvaiable(String username, String password,String DeviceId){
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "https://rhrahadtec.xyz/custard_apple/login_user.php";
 
@@ -89,7 +102,9 @@ public class LoginScreen extends AppCompatActivity {
                             finish();
                         } else if(cleanResponse.equals("Wrong Username & Password")){
                             Toast.makeText(LoginScreen.this, "Wrong Username or Password", Toast.LENGTH_SHORT).show();
-                        } else {
+                        }else if(cleanResponse.equals("Already logged in on another device")){
+                            Toast.makeText(LoginScreen.this, "Already logged in on another device", Toast.LENGTH_SHORT).show();
+                        }else {
                             Toast.makeText(LoginScreen.this, "Server Msg: " + cleanResponse, Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -107,6 +122,7 @@ public class LoginScreen extends AppCompatActivity {
                 map.put("username", username);
                 map.put("password", password);
                 map.put("key", "Rahad#811439");
+                map.put("device_id", DeviceId);
                 return map;
             }
         };

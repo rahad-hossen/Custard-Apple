@@ -1,6 +1,8 @@
 package com.rahadtec.custardapple;
 
 import android.content.ContentValues;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -43,6 +45,8 @@ public class HomeScreen extends AppCompatActivity {
     MaterialCardView card_add_data, card_download, Reset_dataBtn;
     TextView usernameDisplay,tv_balance;
     DatabaseHelper dbHelper;
+    PrefaranceManager manager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +61,7 @@ public class HomeScreen extends AppCompatActivity {
         Reset_dataBtn = findViewById(R.id.Reset_dataBtn);
 
         dbHelper = new DatabaseHelper(this);
+        manager = new PrefaranceManager(HomeScreen.this);
 
         card_add_data.setOnClickListener(v -> {
             startActivity(new Intent(HomeScreen.this, InsertData.class));
@@ -83,12 +88,34 @@ public class HomeScreen extends AppCompatActivity {
             finishAffinity();
         }
 
+        usernameDisplay.setOnClickListener(v -> {
+            Logout();
+        });
+
         updateDashboard();
 
     }
 
+    private void Logout(){
+        new AlertDialog.Builder(HomeScreen.this)
+                .setIcon(R.drawable.custard_apple_fresh)
+                .setTitle("Custard Apple")
+                .setMessage("Are you sure you want to Logout.")
+                .setPositiveButton(
+                        "yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                manager.logoutUser();
+                                startActivity(new Intent(HomeScreen.this, LoginScreen.class));
+                                finish();
+                            }
+                        }
+                )
+                .setNegativeButton(android.R.string.cancel, null)
+                .setIconAttribute(android.R.attr.alertDialogIcon)
+                .show();
 
-
+    }
 
     private void showResetConfirmationDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
