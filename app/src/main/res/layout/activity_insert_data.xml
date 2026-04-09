@@ -31,6 +31,7 @@
             android:layout_marginBottom="30dp"
             >
             <ImageView
+                android:id="@+id/home_backBtn"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:src="@drawable/back_icon"
@@ -155,7 +156,6 @@
             android:layout_margin="10dp"
             android:textIsSelectable="true"
             />
-
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_insert"

@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,7 @@ public class InsertData extends AppCompatActivity {
     private Runnable runnable;
     private TimeProvider timeProvider = new SystemTimeProvider();
     DatabaseHelper dbHelper;
+    ImageView home_backBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,7 @@ public class InsertData extends AppCompatActivity {
         btnInsert = findViewById(R.id.btn_insert);
         tv_display_code = findViewById(R.id.tv_display_code);
         timeINsecend = findViewById(R.id.timeINsecend);
+        home_backBtn = findViewById(R.id.home_backBtn);
         dbHelper = new DatabaseHelper(this);
 
 
@@ -69,6 +72,9 @@ public class InsertData extends AppCompatActivity {
 //                }
 //            }
 //        });
+        home_backBtn.setOnClickListener(v -> {
+            onBackPressed();
+        });
 
         tvShowCode.setOnClickListener(new View.OnClickListener() {
             @Override
