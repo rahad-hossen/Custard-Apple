@@ -1,5 +1,8 @@
 package com.rahadtec.custardapple;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -29,6 +32,7 @@ public class InsertData extends AppCompatActivity {
     private TextView tvShowCode;
     private Button btnInsert;
     TextView tv_display_code,timeINsecend;
+    ImageView btn_copy;
 
 
     private Handler handler = new Handler();
@@ -51,6 +55,7 @@ public class InsertData extends AppCompatActivity {
         tv_display_code = findViewById(R.id.tv_display_code);
         timeINsecend = findViewById(R.id.timeINsecend);
         home_backBtn = findViewById(R.id.home_backBtn);
+        btn_copy = findViewById(R.id.btn_copy);
         dbHelper = new DatabaseHelper(this);
 
 
@@ -82,6 +87,18 @@ public class InsertData extends AppCompatActivity {
                 startOTPCycle();
             }
         });
+        btn_copy.setOnClickListener(v -> {
+            String textToCopy = tv_display_code.getText().toString();
+
+            if (!textToCopy.isEmpty()) {
+                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("Copied Code", textToCopy);
+                clipboard.setPrimaryClip(clip);
+
+                // ইউজারকে জানানোর জন্য একটি ছোট মেসেজ (Toast)
+                Toast.makeText(this, "Code copied to clipboard!", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         btnInsert.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,6 +106,7 @@ public class InsertData extends AppCompatActivity {
                 saveDataLocally();
             }
         });
+
 
 
     }

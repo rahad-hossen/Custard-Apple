@@ -139,23 +139,40 @@
             android:textStyle="bold"
             />
 
-        <TextView
-            android:id="@+id/tv_display_code"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/code_view_bg"
-            android:gravity="center"
-            android:padding="16dp"
-            android:text=""
-            android:textColor="#2D5D4B"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:letterSpacing="0.2"
-            android:typeface="monospace"
-            android:elevation="2dp"
-            android:layout_margin="10dp"
-            android:textIsSelectable="true"
-            />
+            android:layout_margin="10dp">
+
+            <TextView
+                android:id="@+id/tv_display_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/code_view_bg"
+                android:gravity="center"
+                android:padding="16dp"
+                android:text=""
+                android:textColor="#2D5D4B"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.2"
+                android:typeface="monospace"
+                android:elevation="2dp"
+                android:textIsSelectable="true" />
+
+            <ImageView
+                android:id="@+id/btn_copy"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="12dp"
+                android:padding="8dp"
+                android:src="@drawable/copy_icon"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Copy"
+                android:elevation="3dp" />
+
+        </FrameLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_insert"
