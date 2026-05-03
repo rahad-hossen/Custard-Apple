@@ -182,25 +182,45 @@ public class HomeScreen extends AppCompatActivity {
         DatabaseHelper dbHelper = new DatabaseHelper(this);
         Cursor cursor = dbHelper.getAllData();
 
-        // ১. এক্সেল ফাইল তৈরি করা (মেমোরিতে)
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Custard Apple Data");
 
+        // --- ফন্ট এবং স্টাইল সেটিংস শুরু ---
+        // ১. নরমাল ফন্ট তৈরি (সাইজ ১০)
+        org.apache.poi.ss.usermodel.Font normalFont = workbook.createFont();
+        normalFont.setFontHeightInPoints((short) 10); // ফন্ট সাইজ ১০ সেট করা হলো
+        normalFont.setBold(false); // বোল্ড হবে না, একদম নরমাল থাকবে
+
+        // ২. স্টাইল তৈরি
+        org.apache.poi.ss.usermodel.CellStyle normalStyle = workbook.createCellStyle();
+        normalStyle.setFont(normalFont);
+        // --- ফন্ট এবং স্টাইল সেটিংস শেষ ---
+
         // হেডার তৈরি
         Row headerRow = sheet.createRow(0);
-        headerRow.createCell(0).setCellValue("Username");
-        headerRow.createCell(1).setCellValue("Password");
-        headerRow.createCell(2).setCellValue("Secret Key");
+        String[] headers = {"Username", "Password", "2Fa"};
+
+        for (int i = 0; i < headers.length; i++) {
+            org.apache.poi.ss.usermodel.Cell cell = headerRow.createCell(i);
+            cell.setCellValue(headers[i]);
+            cell.setCellStyle(normalStyle); // হেডারেও সাইজ ১০ সেট করা হলো
+        }
 
         // ডাটাবেজ থেকে ডেটা বসানো
         int rowNum = 1;
         while (cursor.moveToNext()) {
             Row row = sheet.createRow(rowNum++);
-            row.createCell(0).setCellValue(cursor.getString(1)); // Username
-            row.createCell(1).setCellValue(cursor.getString(2)); // Password
-            row.createCell(2).setCellValue(cursor.getString(3)); // Secret Key
+
+            for (int i = 0; i < 3; i++) {
+                org.apache.poi.ss.usermodel.Cell cell = row.createCell(i);
+                cell.setCellValue(cursor.getString(i + 1));
+                cell.setCellStyle(normalStyle); // প্রত্যেকটি ডাটা সেলে সাইজ ১০ সেট করা হলো
+            }
         }
         cursor.close();
+
+        sheet.setDefaultColumnWidth(12);
+        sheet.setDefaultRowHeightInPoints(15);
 
         // ২. MediaStore ব্যবহার করে Downloads ফোল্ডারে ফাইল রাইট করা
         String fileName = file_Name + ".xlsx";
