@@ -190,6 +190,7 @@ public class HomeScreen extends AppCompatActivity {
         org.apache.poi.ss.usermodel.Font normalFont = workbook.createFont();
         normalFont.setFontHeightInPoints((short) 10); // ফন্ট সাইজ ১০ সেট করা হলো
         normalFont.setBold(false); // বোল্ড হবে না, একদম নরমাল থাকবে
+        normalFont.setFontName("Arial");
 
         // ২. স্টাইল তৈরি
         org.apache.poi.ss.usermodel.CellStyle normalStyle = workbook.createCellStyle();
