@@ -56,7 +56,7 @@ public class activity_splash extends AppCompatActivity {
 
                     if (cleanResponse.equals("Valid")) {
                         // সবকিছু ঠিক থাকলে হোম স্ক্রিনে যাবে
-                        startActivity(new Intent(activity_splash.this, HomeScreen.class));
+                        startActivity(new Intent(activity_splash.this, motherScreen.class));
                         finish();
                     } else if (cleanResponse.equals("Expired")) {
                         showErrorDialog("Your Subscription Ended.");

@@ -98,7 +98,7 @@ public class LoginScreen extends AppCompatActivity {
                             PrefaranceManager manager = new PrefaranceManager(LoginScreen.this);
                             manager.saveUserLogin(username);
                             Toast.makeText(LoginScreen.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(LoginScreen.this, HomeScreen.class));
+                            startActivity(new Intent(LoginScreen.this, motherScreen.class));
                             finish();
 
                         } else if (cleanResponse.equals("Wrong Username & Password")) {
