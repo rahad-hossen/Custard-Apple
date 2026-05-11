@@ -15,7 +15,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class motherScreen extends AppCompatActivity {
 
     TextView usernameDisplay;
-    LinearLayout TwoFA,InstraCookie;
+    LinearLayout TwoFA,InstraCookie,fbClone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +26,7 @@ public class motherScreen extends AppCompatActivity {
         usernameDisplay= findViewById(R.id.usernameDisplay);
         TwoFA = findViewById(R.id.TwoFA);
         InstraCookie = findViewById(R.id.InstraCookie);
+        fbClone = findViewById(R.id.fbClone);
 
         PrefaranceManager manager = new PrefaranceManager(motherScreen.this);
         String username = manager.getUsername();
@@ -43,6 +44,10 @@ public class motherScreen extends AppCompatActivity {
         });
         InstraCookie.setOnClickListener(v -> {
             startActivity(new Intent(motherScreen.this, Cookies_main.class));
+        });
+
+        fbClone.setOnClickListener(v -> {
+            startActivity(new Intent(motherScreen.this, fb_mother.class));
         });
 
     }

@@ -21,6 +21,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CustardApple">
         <activity
+            android:name=".fb_mother"
+            android:exported="false" />
+        <activity
+            android:name=".fb_home"
+            android:exported="false" />
+        <activity
             android:name=".Cookies_main"
             android:exported="false" />
         <activity

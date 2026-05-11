@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:fillViewport="true"
+    tools:context=".fb_home"
     android:background="@color/bg_light">
 
     <LinearLayout
@@ -15,7 +17,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Insta-cookies"
+            android:text="Fb Work"
             android:textColor="@color/card_green_dark"
             android:textSize="24sp"
             android:layout_marginTop="20dp"
@@ -45,14 +47,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Username"
+                    android:text="Your UID"
                     android:textColor="@color/card_green_dark"
                     android:textStyle="bold" />
                 <EditText
                     android:id="@+id/etUsername"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:hint="Enter username"
+                    android:hint="Enter UID"
                     android:paddingHorizontal="10dp"
                     android:layout_marginBottom="15dp"
                     android:background="@drawable/input_background" />
@@ -108,19 +110,8 @@
                     android:weightSum="2">
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btnCopy"
-                        android:layout_width="0dp"
-                        android:layout_height="45dp"
-                        android:layout_weight="1"
-                        android:layout_marginRight="5dp"
-                        android:text="Copy"
-                        android:textAllCaps="false"
-                        android:textColor="@color/white"
-                        android:background="@drawable/button_green_bg" />
-
-                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/SaveBtn"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:layout_weight="1"
                         android:layout_marginLeft="5dp"
