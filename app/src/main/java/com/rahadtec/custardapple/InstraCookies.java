@@ -39,6 +39,7 @@ public class InstraCookies extends AppCompatActivity {
     // ডাটাবেস হেল্পার ডিক্লেয়ার করা
     Cookies_DB_helper dbHelper;
     LinearLayout parentVisible;
+    ImageView clearIcon,backBtn;
 
 
     private Handler handler = new Handler();
@@ -68,6 +69,17 @@ public class InstraCookies extends AppCompatActivity {
         drop_down = findViewById(R.id.drop_down);
         drop_up = findViewById(R.id.drop_up);
         parentVisible = findViewById(R.id.parentVisible);
+        clearIcon = findViewById(R.id.clearIcon);
+        backBtn = findViewById(R.id.backBtn);
+
+
+
+
+        backBtn.setOnClickListener(v -> {
+            onBackPressed();
+        });
+
+
 
         // ওয়েবভিউ সেটআপ
         myWebView.setWebViewClient(new WebViewClient());
@@ -76,10 +88,11 @@ public class InstraCookies extends AppCompatActivity {
         myWebView.loadUrl("https://www.instagram.com/accounts/login/");
 
 
-        myWebView2.setWebViewClient(new WebViewClient());
-        myWebView2.getSettings().setJavaScriptEnabled(true);
-        myWebView2.getSettings().setDomStorageEnabled(true);
-        myWebView2.loadUrl("https://submitwork.org");
+//        webview2 for running link
+//        myWebView2.setWebViewClient(new WebViewClient());
+//        myWebView2.getSettings().setJavaScriptEnabled(true);
+//        myWebView2.getSettings().setDomStorageEnabled(true);
+//        myWebView2.loadUrl("https://submitwork.org");
 
 //        drop_up.setOnClickListener(v -> {
 //            if(parentVisible.getVisibility() == VISIBLE){
@@ -104,6 +117,10 @@ public class InstraCookies extends AppCompatActivity {
 //                parentVisible.setVisibility(GONE);
 //            }
 //        });
+
+        clearIcon.setOnClickListener(v -> {
+            TwoFA.setText("");
+        });
 
         drop_down.setOnClickListener(v -> {
             // মেনু যখন বন্ধ, তখন ক্লিক করলে খুলবে
@@ -180,7 +197,7 @@ public class InstraCookies extends AppCompatActivity {
             String cookies = etCookies.getText().toString().trim();
 
             if (!user.isEmpty() && !pass.isEmpty() && !cookies.isEmpty()) {
-                boolean isInserted = dbHelper.insertData(user, pass, cookies);
+                boolean isInserted = dbHelper.insertData(user, pass);
 
                 if (isInserted) {
                     int total = dbHelper.getTotalCount();
@@ -190,7 +207,7 @@ public class InstraCookies extends AppCompatActivity {
                     CookieManager cookieManager = CookieManager.getInstance();
                     cookieManager.removeAllCookies(value -> {
                         myWebView.setVisibility(VISIBLE);
-                        myWebView2.setVisibility(View.GONE);
+//                        myWebView2.setVisibility(View.GONE);
                         // কুকি পুরোপুরি ডিলিট হওয়ার পর নতুন করে পেজ লোড হবে
                         myWebView.clearCache(true);
                         myWebView.clearHistory();
@@ -247,7 +264,7 @@ public class InstraCookies extends AppCompatActivity {
                 Toast.makeText(this, "Copied to Clipboard!", Toast.LENGTH_SHORT).show();
 
                 myWebView.setVisibility(GONE);
-                myWebView2.setVisibility(VISIBLE);
+//                myWebView2.setVisibility(VISIBLE);
 
 
             } else {
@@ -310,4 +327,5 @@ public class InstraCookies extends AppCompatActivity {
             return "Error";
         }
     }
+
 }

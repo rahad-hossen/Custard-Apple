@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -32,6 +33,7 @@ public class Cookies_main extends AppCompatActivity {
     Cookies_DB_helper dbHelper;
     LinearLayout addBtn,downloadBtn, resetBtn;
     TextView tvUsername;
+    Button backBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +50,15 @@ public class Cookies_main extends AppCompatActivity {
         downloadBtn = findViewById(R.id.downloadBtn);
         resetBtn = findViewById(R.id.resetbtn);
         tvUsername = findViewById(R.id.tvUsername);
+        backBtn = findViewById(R.id.backBtn);
 
         // ২. ডাটাবেস থেকে ব্যালেন্স (টোটাল কাউন্ট) আপডেট করা
         updateBalance();
+
+
+        backBtn.setOnClickListener(v -> {
+            onBackPressed();
+        });
 
         PrefaranceManager manager = new PrefaranceManager(Cookies_main.this);
         String username = manager.getUsername();
@@ -155,7 +163,7 @@ public class Cookies_main extends AppCompatActivity {
 
         // হেডার তৈরি
         Row headerRow = sheet.createRow(0);
-        String[] headers = {"username", "password", "cookies"};
+        String[] headers = {"username", "password"};
 
         for (int i = 0; i < headers.length; i++) {
             org.apache.poi.ss.usermodel.Cell cell = headerRow.createCell(i);
@@ -168,7 +176,7 @@ public class Cookies_main extends AppCompatActivity {
         while (cursor.moveToNext()) {
             Row row = sheet.createRow(rowNum++);
 
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 2; i++) {
                 org.apache.poi.ss.usermodel.Cell cell = row.createCell(i);
                 cell.setCellValue(cursor.getString(i + 1));
                 cell.setCellStyle(normalStyle); // প্রত্যেকটি ডাটা সেলে সাইজ ১০ সেট করা হলো

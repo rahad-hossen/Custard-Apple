@@ -10,6 +10,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -20,7 +21,7 @@ public class fb_home extends AppCompatActivity {
     public EditText etUsername, etPassword, etCookies;
     public Button  btnSave, btnViewCookies;
     public WebView myWebView;
-
+    ImageView backBtn;
     // ডাটাবেস হেল্পার
     fb_Cookies dbHelper;
 
@@ -40,6 +41,14 @@ public class fb_home extends AppCompatActivity {
         btnSave = findViewById(R.id.SaveBtn);
         btnViewCookies = findViewById(R.id.btnViewCookies);
         myWebView = findViewById(R.id.myWebView);
+        backBtn = findViewById(R.id.backBtn);
+
+
+
+
+        backBtn.setOnClickListener(v -> {
+            onBackPressed();
+        });
 
         // --- ওয়েবভিউ সেটিংস শুরু ---
         WebSettings webSettings = myWebView.getSettings();

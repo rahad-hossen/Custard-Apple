@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,6 +47,7 @@ public class HomeScreen extends AppCompatActivity {
     TextView usernameDisplay,tv_balance;
     DatabaseHelper dbHelper;
     PrefaranceManager manager;
+    Button backBtn;
 
 
     @Override
@@ -59,12 +61,17 @@ public class HomeScreen extends AppCompatActivity {
         tv_balance = findViewById(R.id.tv_balance);
         card_download = findViewById(R.id.card_download);
         Reset_dataBtn = findViewById(R.id.Reset_dataBtn);
+        backBtn = findViewById(R.id.backBtn);
 
         dbHelper = new DatabaseHelper(this);
         manager = new PrefaranceManager(HomeScreen.this);
 
         card_add_data.setOnClickListener(v -> {
             startActivity(new Intent(HomeScreen.this, InsertData.class));
+        });
+
+        backBtn.setOnClickListener(v -> {
+            onBackPressed();
         });
 
 

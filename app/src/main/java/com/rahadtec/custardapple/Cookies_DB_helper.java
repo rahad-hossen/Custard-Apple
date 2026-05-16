@@ -9,14 +9,13 @@ import android.database.sqlite.SQLiteOpenHelper; // এটি ইমপোর্
 public class Cookies_DB_helper extends SQLiteOpenHelper { // SQLiteOpenHelper যোগ করা হয়েছে
 
     private static final String DATABASE_NAME = "Custard_Cookies.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     // টেবিল ও কলামের নাম
     public static final String TABLE_NAME = "user_cookies";
     public static final String COL_ID = "id";
     public static final String COL_USERNAME = "username";
     public static final String COL_PASSWORD = "password";
-    public static final String COL_SECRET_KEY = "cookies";
 
     public Cookies_DB_helper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -28,8 +27,7 @@ public class Cookies_DB_helper extends SQLiteOpenHelper { // SQLiteOpenHelper �
         String createTable = "CREATE TABLE " + TABLE_NAME + " (" +
                 COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COL_USERNAME + " TEXT, " +
-                COL_PASSWORD + " TEXT, " +
-                COL_SECRET_KEY + " TEXT)";
+                COL_PASSWORD + " TEXT)";
         db.execSQL(createTable);
     }
 
@@ -40,12 +38,11 @@ public class Cookies_DB_helper extends SQLiteOpenHelper { // SQLiteOpenHelper �
     }
 
     // ডেটা ইনসার্ট করার মেথড
-    public boolean insertData(String user, String pass, String secret) {
+    public boolean insertData(String user, String pass) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COL_USERNAME, user);
         values.put(COL_PASSWORD, pass);
-        values.put(COL_SECRET_KEY, secret);
 
         long result = db.insert(TABLE_NAME, null, values);
         // db.close(); // ডাটা ইনসার্ট করার পর চাইলে ক্লোজ করতে পারেন

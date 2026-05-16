@@ -12,14 +12,34 @@
         android:orientation="vertical"
         android:padding="20dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Insta-cookies"
-            android:textColor="@color/card_green_dark"
-            android:textSize="24sp"
-            android:layout_marginTop="20dp"
-            android:textStyle="bold" />
+            android:orientation="horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center"
+
+            >
+            <ImageView
+                android:id="@+id/backBtn"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/back_icon"
+                android:layout_gravity="center"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Insta-cookies"
+                android:textColor="@color/card_green_dark"
+                android:textSize="24sp"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textStyle="bold" />
+
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -171,16 +191,34 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="gone"
-                    >
-                    <EditText
-                        android:id="@+id/TwoFA"
+                    android:visibility="gone">
+
+                    <!-- EditText + Clear Icon -->
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:hint="Enter your two FA"
-                        android:paddingHorizontal="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@drawable/input_background" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp">
+
+                        <EditText
+                            android:id="@+id/TwoFA"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:hint="Enter your two FA"
+                            android:paddingHorizontal="10dp"
+                            android:paddingEnd="45dp"
+                            android:background="@drawable/input_background" />
+
+                        <ImageView
+                            android:id="@+id/clearIcon"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginEnd="12dp"
+                            android:src="@drawable/cancel_icon"
+                            android:visibility="visible" />
+
+                    </RelativeLayout>
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/getCode"
@@ -192,7 +230,6 @@
                         android:textColor="@color/card_green_dark"
                         android:textStyle="bold"
                         android:background="@drawable/button_outline_bg" />
-
 
                 </LinearLayout>
 

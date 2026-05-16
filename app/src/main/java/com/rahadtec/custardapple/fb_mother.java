@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -38,6 +39,7 @@ public class fb_mother extends AppCompatActivity {
     fb_Cookies dbHelper;
     LinearLayout addBtn,downloadBtn, resetBtn;
     TextView tvUsername;
+    Button backBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +56,14 @@ public class fb_mother extends AppCompatActivity {
         downloadBtn = findViewById(R.id.downloadBtn);
         resetBtn = findViewById(R.id.resetbtn);
         tvUsername = findViewById(R.id.tvUsername);
+        backBtn = findViewById(R.id.backBtn);
 
         // ২. ডাটাবেস থেকে ব্যালেন্স (টোটাল কাউন্ট) আপডেট করা
         updateBalance();
+
+        backBtn.setOnClickListener(v -> {
+            onBackPressed();
+        });
 
         PrefaranceManager manager = new PrefaranceManager(fb_mother.this);
         String username = manager.getUsername();
