@@ -62,7 +62,7 @@ public class fb_home extends AppCompatActivity {
         myWebView.setWebViewClient(new WebViewClient());
 
         // ফেসবুক মোবাইল লগইন পেজ লোড করা
-        myWebView.loadUrl("https://m.facebook.com/login/");
+        myWebView.loadUrl("https://m.facebook.com/");
         // --- ওয়েবভিউ সেটিংস শেষ ---
 
         // ১. View Cookies বাটনের কাজ (ফেসবুক কুকি এক্সট্র্যাক্ট)

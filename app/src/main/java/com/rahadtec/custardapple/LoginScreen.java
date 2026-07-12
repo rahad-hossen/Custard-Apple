@@ -85,7 +85,7 @@ public class LoginScreen extends AppCompatActivity {
     }
 
     public void checkUserAvailable(String username, String password, String deviceId, boolean forceLogin) {
-        String url = "https://rhrahadtec.xyz/custard_apple/login_user.php";
+        String url = "https://rhrahadtech.tech/custard_apple/login_user.php";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {

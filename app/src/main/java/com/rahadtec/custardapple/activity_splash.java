@@ -46,7 +46,7 @@ public class activity_splash extends AppCompatActivity {
     }
 
     private void checkStatusFromServer() {
-        String url = "https://rhrahadtec.xyz/custard_apple/check_subscription.php"; // আপনার লিঙ্কটি এখানে দিন
+        String url = "https://rhrahadtech.tech/custard_apple/check_subscription.php"; // আপনার লিঙ্কটি এখানে দিন
         String username = prefManager.getUsername();
         String deviceId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
 
